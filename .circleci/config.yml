@@ -3,9 +3,11 @@ jobs:
   build:
     environment:
       IMAGE_NAME: prashanthsams/json-server
-    machine: true
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: build application docker image
           command: |
@@ -18,8 +20,10 @@ jobs:
   publish-latest:
     environment:
       IMAGE_NAME: prashanthsams/json-server
-    machine: true
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
+      - setup_remote_docker
       - run:
           name: Publish Docker Image
           command: |

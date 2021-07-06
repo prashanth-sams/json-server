@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Publish Docker Image
           command: |
-                  echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+                  echo ${{ env.DOCKERHUB_PASSWORD }} | docker login --username ${{ env.DOCKERHUB_USERNAME }} --password-stdin
                   docker push $IMAGE_NAME:latest
 
 workflows:

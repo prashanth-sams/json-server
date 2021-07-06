@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    environment:
+    env:
       IMAGE_NAME: prashanthsams/json-server
     machine: true
     steps:
@@ -16,17 +16,15 @@ jobs:
             docker run -i json-server  > result
             sh -c "[ -s result ]"
   publish-latest:
-    environment:
+    env:
       IMAGE_NAME: prashanthsams/json-server
-      USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
     machine: true
     steps:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-                  cat ${{ secrets.docker.DOCKERHUB_USERNAME }}
-                  echo $PASSWORD | docker login -u $USERNAME --password-stdin
+                  cat ${{ secrets.DOCKERHUB_USERNAME }}
+                  echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
                   docker push $IMAGE_NAME:latest
 
 workflows:

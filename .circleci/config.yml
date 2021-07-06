@@ -20,14 +20,12 @@ jobs:
     working_directory: ~/app
     environment:
       IMAGE_NAME: prashanthsams/json-server
-      USERNAME: {{ docker.DOCKERHUB_USERNAME }}
-      PASSWORD: {{ docker.DOCKERHUB_PASSWORD }}
     machine: true
     steps:
       - run:
           name: Publish Docker Image
           command: |
-                  echo $PASSWORD | docker login --username $USERNAME --password-stdin
+                  echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
                   docker push $IMAGE_NAME:latest
 
 workflows:

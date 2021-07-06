@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Publish Docker Image
           command: |
-                  docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASSWORD
+                  docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
                   docker push $IMAGE_NAME:latest
 
 workflows:

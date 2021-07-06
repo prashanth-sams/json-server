@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image and publish to github packages
       run: |
-        echo $PAT | docker login ghcr.io --username prashanth-sams --password-stdin
+        docker login ghcr.io --username prashanth-sams --password ${{ secrets.GITHUB_TOKEN }}
         docker build --file Dockerfile -t json-server .
         docker tag json-server ghcr.io/prashanth-sams/json-server:0.1
         docker push ghcr.io/prashanth-sams/json-server:0.1

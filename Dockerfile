@@ -3,14 +3,8 @@ FROM node:16-alpine
 LABEL author="Prashanth Sams"
 
 
-RUN \
-    echo "==> Installing app..."                && \
-    npm install -g json-server  && \
-    \
-    \
-    echo "==> Removing unused temp..."         && \
-    rm -rf /root/.npm                  \
-           /usr/lib/node_modules/npm
+RUN npm install -g json-server
+RUN rm -rf /root/.npm /usr/lib/node_modules/npm
 
 
 # configuration

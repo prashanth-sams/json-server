@@ -3,11 +3,9 @@ jobs:
   build:
     environment:
       IMAGE_NAME: prashanthsams/json-server
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: build application docker image
           command: |
@@ -20,14 +18,12 @@ jobs:
   publish-latest:
     environment:
       IMAGE_NAME: prashanthsams/json-server
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    machine: true
     steps:
-      - setup_remote_docker
       - run:
           name: Publish Docker Image
           command: |
-                  echo "${DOCKERHUB_PASSWORD}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+                  echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
                   docker push $IMAGE_NAME:latest
 
 workflows:

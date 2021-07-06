@@ -22,8 +22,8 @@ jobs:
     working_directory: ~/app
     environment:
       IMAGE_NAME: prashanthsams/json-server
-      DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      # DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      # DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Publish Docker Image
           command: |
-                  echo ${secrets.DOCKERHUB_PASSWORD} | docker login --username ${secrets.DOCKERHUB_USERNAME} --password-stdin
+                  echo "${DOCKERHUB_PASSWORD}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
                   docker push $IMAGE_NAME:latest
 
 workflows:

@@ -18,8 +18,8 @@ jobs:
   publish-latest:
     environment:
       IMAGE_NAME: prashanthsams/json-server
-      DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
-      DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+      DOCKERHUB_USERNAME: ${{ DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ DOCKERHUB_PASSWORD }}
     machine: true
     steps:
       - run:

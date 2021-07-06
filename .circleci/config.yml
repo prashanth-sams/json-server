@@ -18,14 +18,14 @@ jobs:
   publish-latest:
     environment:
       IMAGE_NAME: prashanthsams/json-server
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASSWORD }}
+      DOCKERHUB_USERNAME: ${{ secrets.docker.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.docker.DOCKERHUB_PASSWORD }}
     machine: true
     steps:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-                  echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+                  echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
                   docker push $IMAGE_NAME:latest
 
 workflows:

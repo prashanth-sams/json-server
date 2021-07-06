@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/app
     environment:
       IMAGE_NAME: prashanthsams/json-server
     machine: true
@@ -16,6 +17,7 @@ jobs:
             docker run -i json-server  > result
             sh -c "[ -s result ]"
   publish-latest:
+    working_directory: ~/app
     environment:
       IMAGE_NAME: prashanthsams/json-server
     machine: true

@@ -4,9 +4,10 @@ jobs:
     working_directory: ~/app
     environment:
       IMAGE_NAME: prashanthsams/json-server
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout:
-          path: ~/repo
       - setup_remote_docker
       - run:
           name: build application docker image
@@ -18,13 +19,15 @@ jobs:
             docker run -i json-server  > result
             sh -c "[ -s result ]"
   publish-latest:
+    working_directory: ~/app
     environment:
       IMAGE_NAME: prashanthsams/json-server
       DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout:
-          path: ~/repo
       - setup_remote_docker
       - run:
           name: Publish Docker Image

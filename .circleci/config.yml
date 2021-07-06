@@ -4,9 +4,10 @@ jobs:
     working_directory: ~/app
     environment:
       IMAGE_NAME: prashanthsams/json-server
-    machine: true
     steps:
-      - checkout
+      - checkout:
+          path: ~/repo
+      - setup_remote_docker
       - run:
           name: build application docker image
           command: |
@@ -17,12 +18,13 @@ jobs:
             docker run -i json-server  > result
             sh -c "[ -s result ]"
   publish-latest:
-    working_directory: ~/app
+    - checkout:
+          path: ~/repo
+    - setup_remote_docker
     environment:
       IMAGE_NAME: prashanthsams/json-server
       DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-    machine: true
     steps:
       - run:
           name: Publish Docker Image

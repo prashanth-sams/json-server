@@ -14,5 +14,5 @@ jobs:
       run: |
         docker login ghcr.io --username prashanth-sams --password ${{ secrets.GITHUB_TOKEN }}
         docker build --file Dockerfile -t json-server .
-        docker tag json-server ghcr.io/prashanth-sams/json-server:0.1
-        docker push ghcr.io/prashanth-sams/json-server:0.1
+        docker tag json-server ghcr.io/prashanth-sams/json-server:latest
+        docker push ghcr.io/prashanth-sams/json-server:latest
